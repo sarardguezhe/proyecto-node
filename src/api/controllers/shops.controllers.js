@@ -2,7 +2,7 @@ const Shop = require('../models/shops.model');
 
 const getShops = async (req, res) => {
     try {
-      const allShops = await Shop.find().populate('products', 'title artist year genre price');
+      const allShops = await Shop.find().populate('products', 'title artist image year genre price');
       return res.status(200).json(allShops);
     } catch (error) {
       return res.status(500).json(error);
@@ -30,7 +30,7 @@ const putShop = async (req, res) => {
     });
     
     if (!updatedShop) {
-      return res.status(404).json({ message: "No existe este id de tienda" });
+      return res.status(404).json({ message: "This id doesn't exist" });
     }
     return res.status(200).json(updatedShop);
   } catch (error) {
@@ -43,7 +43,7 @@ const deleteShop = async (req, res) => {
     const {id} = req.params;
     const deletedShop = await Shop.findByIdAndDelete(id)
     if (!deletedShop) {
-        return res.status(404).json({message:"Este id no existe"})
+        return res.status(404).json({message:"This id doesn't exist"})
     }
     return res.status(200).json(deletedShop);
   } catch (error) {

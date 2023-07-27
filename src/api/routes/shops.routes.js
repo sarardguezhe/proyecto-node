@@ -1,6 +1,6 @@
 const express = require('express');
 const {getShops, postShop, putShop, deleteShop} = require('../controllers/shops.controllers');
-const {isAuth, isAdmin} = require('../../middlewares/auth');
+const {isAdmin} = require('../../middlewares/auth');
 
 const shopsRoutes = express.Router();
 

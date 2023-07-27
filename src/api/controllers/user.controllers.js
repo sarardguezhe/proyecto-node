@@ -1,20 +1,20 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const {validateEmail, validatePassword, usedEmail} = require("../../utils/validators");
-const {generateSign} = require("../../utils/jwt");
+const {generateToken} = require("../../utils/jwt");
 
 const signup = async (req, res ) => {
     try {
         const newUser = new User(req.body);
 
         if (!validateEmail(newUser.email)) {
-            return res.status(400).json({message:"Email inválido"});
+            return res.status(400).json({message:"Invalid email"});
         }
         if (!validatePassword(newUser.password)) {
-            return res.status(400).json({message:"Contraseña inválida"});
+            return res.status(400).json({message:"Invalid password"});
         }
         if (await usedEmail(newUser.email)) {
-            return res.status(400).json({message:"El email introducido ya existe"});
+            return res.status(400).json({message:"This email already exists"});
         }
 
         newUser.password = bcrypt.hashSync(newUser.password, 10);
@@ -32,12 +32,12 @@ const login = async (req, res) => {
         const userInfo = await User.findOne({email: req.body.email});
         
         if (!userInfo) {
-            return res.status(404).json({message:"Email no encontrado"});
+            return res.status(404).json({message:"Email not found"});
         }
         if (!bcrypt.compareSync(req.body.password,userInfo.password)) {
-            return res.status(404).json({message:"Contraseña incorrecta"});
+            return res.status(404).json({message:"Incorrect password"});
         }
-       const token = generateSign(userInfo._id,userInfo.email);
+       const token = generateToken(userInfo._id,userInfo.email);
 
        return res.status(200).json({user:userInfo,token:token});
 

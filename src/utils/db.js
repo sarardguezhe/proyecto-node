@@ -14,7 +14,7 @@ const connect = async () =>{
         console.log(`Connect to: ${name} host: ${host}`);
 
     } catch (error) {
-        console.log(`Error de conexión: ${error}`);
+        console.log(`Connection error: ${error}`);
     };
 
 };

@@ -6,7 +6,7 @@ const shopSchema = new Schema(
     name: {type:String, required:true},
     city: {type:String, required:true},
     address: {type:String, required:true},
-    products: [{type: Schema.Types.ObjectId, ref: "vinyls" }],
+    products: [{type: Schema.Types.ObjectId, ref: "vinyls"}],
     }
 );
 

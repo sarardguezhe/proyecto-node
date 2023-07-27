@@ -1,12 +1,19 @@
 const jwt = require("jsonwebtoken");
 
-const generateSign = (id,email) => {
-    return jwt.sign({id,email},process.env.JWT_KEY,{expiresIn:"1h"});
+const generateToken = (id, email) => {
+    return jwt.sign(
+        {id, email},
+        process.env.JWT_KEY,
+        {expiresIn:"1h"}
+    );
 };
 
-const verifySign=(token) => {
-    return jwt.verify(token, process.env.JWT_KEY);
+const verifyToken = (token) => {
+    return jwt.verify(
+        token, 
+        process.env.JWT_KEY
+    );
 };
 
 
-module.exports= {generateSign, verifySign};
+module.exports= {generateToken, verifyToken};

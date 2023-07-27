@@ -6,6 +6,7 @@ const arrayVinyls = [
     {
         "title": "Thriller",
         "artist": "Michael Jackson",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474343/covers/cuodwtzmyb3woab4ddjn.png",
         "year": 1982,
         "genre": "Pop",
         "price": 19.99,
@@ -14,6 +15,7 @@ const arrayVinyls = [
       {
         "title": "Back in Black",
         "artist": "AC/DC",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474371/covers/faugbctef5zdnx527r2o.png",
         "year": 1980,
         "genre": "Rock",
         "price": 17.50,
@@ -22,6 +24,7 @@ const arrayVinyls = [
       {
         "title": "The Dark Side of the Moon",
         "artist": "Pink Floyd",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474377/covers/by8ogdycs8ru90oyifao.png",
         "year": 1973,
         "genre": "Progressive Rock",
         "price": 22.00,
@@ -30,6 +33,7 @@ const arrayVinyls = [
       {
         "title": "Their Greatest Hits (1971-1975)",
         "artist": "Eagles",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474407/covers/zfij0dmnoxu07t0uoex7.png",
         "year": 1976,
         "genre": "Rock",
         "price": 21.25,
@@ -38,6 +42,7 @@ const arrayVinyls = [
       {
         "title": "Bat Out of Hell",
         "artist": "Meat Loaf",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474412/covers/gcnfiswfpqto7oa3gjb7.png",
         "year": 1977,
         "genre": "Rock",
         "price": 18.99,
@@ -46,6 +51,7 @@ const arrayVinyls = [
       {
         "title": "Come On Over",
         "artist": "Shania Twain",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474416/covers/wppsffo1y9aw5zije7mu.png",
         "year": 1997,
         "genre": "Country",
         "price": 16.80,
@@ -54,6 +60,7 @@ const arrayVinyls = [
       {
         "title": "Rumours",
         "artist": "Fleetwood Mac",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474416/covers/epmskhrvnbmf64v9kicv.png",
         "year": 1977,
         "genre": "Rock",
         "price": 20.15,
@@ -62,6 +69,7 @@ const arrayVinyls = [
       {
         "title": "The Bodyguard",
         "artist": "Soundtrack",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474411/covers/xa2atvjab4xbetd28whj.png",
         "year": 1992,
         "genre": "Soundtrack",
         "price": 14.50,
@@ -70,6 +78,7 @@ const arrayVinyls = [
       {
         "title": "Saturday Night Fever",
         "artist": "Bee Gees",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474412/covers/tf7wwuavginaxsykhwen.png",
         "year": 1977,
         "genre": "Disco",
         "price": 19.75,
@@ -78,6 +87,7 @@ const arrayVinyls = [
       {
         "title": "Come Away With Me",
         "artist": "Norah Jones",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474409/covers/ywe54bq9advbefosbrua.png",
         "year": 2002,
         "genre": "Jazz",
         "price": 15.90,
@@ -86,6 +96,7 @@ const arrayVinyls = [
       {
         "title": "Led Zeppelin IV",
         "artist": "Led Zeppelin",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474412/covers/bjbhux8oeejr6hcig2s4.png",
         "year": 1971,
         "genre": "Rock",
         "price": 23.25,
@@ -94,6 +105,7 @@ const arrayVinyls = [
       {
         "title": "Backstreet Boys",
         "artist": "Backstreet Boys",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474415/covers/ihj1plkg3hf0gdcdjbxi.png",
         "year": 1996,
         "genre": "Pop",
         "price": 18.40,
@@ -102,6 +114,7 @@ const arrayVinyls = [
       {
         "title": "Jagged Little Pill",
         "artist": "Alanis Morissette",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474416/covers/lyrxta8pfew8jjoj46zq.png",
         "year": 1995,
         "genre": "Alternative Rock",
         "price": 17.99,
@@ -110,6 +123,7 @@ const arrayVinyls = [
       {
         "title": "Come and Get It: The Best of Badfinger",
         "artist": "Badfinger",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474415/covers/tgjs0clnllqeqnqi6dh2.png",
         "year": 1995,
         "genre": "Rock",
         "price": 14.60,
@@ -118,6 +132,7 @@ const arrayVinyls = [
       {
         "title": "Darkness on the Edge of Town",
         "artist": "Bruce Springsteen",
+        "image": "https://res.cloudinary.com/dnisd4vxs/image/upload/v1690474418/covers/qi6hmnf8gx94lwqk8ncs.png",
         "year": 1978,
         "genre": "Rock",
         "price": 21.00,
@@ -135,11 +150,11 @@ mongoose.connect(DB_URL)
         console.log("Vinyls deleted");
     }
 })
-.catch((error)=> console.log("error borrando los vinilos",error))
+.catch((error)=> console.log("Error deleting vinyls collection",error))
 .then(async ()=> {
     const vinylMap = arrayVinyls.map((vinyl) => new Vinyl(vinyl));
     await Vinyl.insertMany(vinylMap);
-    console.log("vinilos insertados correctamente");
+    console.log("Vinyls seed created correctly");
 })
-.catch((error) => console.log("error insertando los vinilos", error))
+.catch((error) => console.log("Error creating vinyls seed", error))
 .finally(()=> mongoose.disconnect())

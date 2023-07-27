@@ -19,4 +19,4 @@ const usedEmail = async (email) => {
   return users.length;
 };
 
-module.exports = { validateEmail, validatePassword, usedEmail };
+module.exports = {validateEmail, validatePassword, usedEmail};

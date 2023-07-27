@@ -1,4 +1,5 @@
 const Vinyl = require('../models/vinyls.model');
+const {deleteFile} = require('../../middlewares/delete');
 
 const getVinyls = async (req, res) => {
     try {
@@ -12,6 +13,11 @@ const getVinyls = async (req, res) => {
 const postVinyl = async (req, res) => {
     try {
       const newVinyl = new Vinyl(req.body);
+
+      for (let i = 0; i < req.files.image.length; i++) {
+        newVinyl.image = [...newVinyl.image, req.files.image[i].path];
+      };
+
       const createdVinyl = await newVinyl.save();
 
       return res.status(200).json(createdVinyl);
@@ -31,7 +37,7 @@ const putVinyl = async (req, res) => {
       });
       
       if (!updatedVinyl) {
-        return res.status(404).json({ message: "no existe este id de vinilo" });
+        return res.status(404).json({ message: "This id doesn't exist" });
       }
       return res.status(200).json(updatedVinyl);
     } catch (error) {
@@ -42,10 +48,18 @@ const putVinyl = async (req, res) => {
 const deleteVinyl = async (req, res) => {
     try {
       const {id} = req.params;
+
       const deletedVinyl = await Vinyl.findByIdAndDelete(id)
       if (!deletedVinyl) {
-          return res.status(404).json({message:"este id no existe"})
-      }
+          return res.status(404).json({message:"This id doesn't exist"})
+      };
+
+      if(deletedVinyl.image.length > 0){
+        for (const eachImg of deletedVinyl.image) {
+          deleteFile(eachImg);
+        }
+      };
+
       return res.status(200).json(deletedVinyl);
     } catch (error) {
       return res.status(500).json(error)

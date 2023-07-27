@@ -1,5 +1,5 @@
 const User = require("../api/models/user.model");
-const {verifySign} = require("../utils/jwt");
+const {verifyToken} = require("../utils/jwt");
 
 
 const isAuth = async (req, res, next) => {
@@ -8,16 +8,16 @@ const isAuth = async (req, res, next) => {
         const authorization = req.headers.authorization;
 
         if (!authorization) {
-            return res.status(401).json({message:"no tienes autorización"});
+            return res.status(401).json({message:"You don't have authorization"});
         }
 
         const token = authorization.split(" ")[1];
       
         if (!token) {
-            return res.status(401).json({message:"el token es inválido o no existe"});
+            return res.status(401).json({message:"Invalid token"});
         }
 
-        const tokenVerified = verifySign(token);
+        const tokenVerified = verifyToken(token);
      
         if (!tokenVerified.id) {
             return res.status(401).json(tokenVerified);
@@ -39,16 +39,16 @@ const isAdmin = async (req, res, next) => {
         const authorization = req.headers.authorization;
 
         if (!authorization) {
-            return res.status(401).json({message:"no tienes autorización"});
+            return res.status(401).json({message:"You don't have authorization"});
         }
 
         const token = authorization.split(" ")[1];
       
         if (!token) {
-            return res.status(401).json({message:"el token es inválido o no existe"});
+            return res.status(401).json({message:"Invalid token"});
         }
 
-        const tokenVerified = verifySign(token);
+        const tokenVerified = verifyToken(token);
      
         if (!tokenVerified.id) {
             return res.status(401).json(tokenVerified);
@@ -58,7 +58,7 @@ const isAdmin = async (req, res, next) => {
         req.user = userLogged;
      
         if (userLogged.role !== "admin") {
-            return res.status(401).json({message:"Se necesitan permisos de administrador"});
+            return res.status(401).json({message:"Admin permissions are required"});
         }
 
         next()
